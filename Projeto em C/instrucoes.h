@@ -2,6 +2,7 @@
 #define INSTRUCOES_H
 
 #include <stdint.h>
+#include <string.h>
 #include "dicionario.h"
 
 // Formato R: [funct7][rs2][rs1][funct3][rd][opcode]

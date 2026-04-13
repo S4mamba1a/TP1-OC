@@ -5,16 +5,22 @@
 #include <string.h>
 #include "dicionario.h"
 
-// Formato R: [funct7][rs2][rs1][funct3][rd][opcode]
+// Função de busca interna
+Instrucao* IIdentificaInstrucao(const char *nome);
+
+// Retorna o caractere do tipo da instrução ('R', 'I', 'S' ou 'B') ou '\0' se não encontrar
+char IdentificaInstrucao(const char *nome);
+
+// Formato R
 uint32_t montar_tipo_R(int opcode, int rd, int funct3, int rs1, int rs2, int funct7);
 
-// Formato I: [imm][rs1][funct3][rd][opcode]
+// Formato I
 uint32_t montar_tipo_I(int opcode, int rd, int funct3, int rs1, int imediato);
 
-// Formato S: [imm[11:5]][rs2][rs1][funct3][imm[4:0]][opcode]
+// Formato S
 uint32_t montar_tipo_S(int opcode, int funct3, int rs1, int rs2, int imediato);
 
-// Formato B: Lógica especial para saltos (bne)
+// Formato B
 uint32_t montar_tipo_B(int opcode, int funct3, int rs1, int rs2, int imediato);
 
 #endif // INSTRUCOES_H

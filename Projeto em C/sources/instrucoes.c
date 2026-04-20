@@ -30,7 +30,7 @@ char IdentificaInstrucao(const char *nome) {
     return inst->tipo;
 }
 
-// --- Funções de Montagem de Bits ---
+// Funções de Montagem de Bits
 
 uint32_t montar_tipo_R(int opcode, int rd, int funct3, int rs1, int rs2, int funct7) {
     uint32_t instrucao = 0;
@@ -49,7 +49,7 @@ uint32_t montar_tipo_I(int opcode, int rd, int funct3, int rs1, int imediato) {
     instrucao |= ((rd & 0x1F) << 7);
     instrucao |= ((funct3 & 0x07) << 12);
     instrucao |= ((rs1 & 0x1F) << 15);
-    instrucao |= ((imediato & 0xFFF) << 20); // Imediato de 12 bits
+    instrucao |= ((uint32_t)(imediato & 0xFFF) << 20); // Imediato de 12 bits
     return instrucao;
 }
 
@@ -58,11 +58,11 @@ uint32_t montar_tipo_S(int opcode, int funct3, int rs1, int rs2, int imediato) {
     uint32_t imm_4_0 = imediato & 0x1F;
     uint32_t imm_11_5 = (imediato >> 5) & 0x7F;
     instrucao |= (opcode & 0x7F);
-    instrucao |= (imm_4_0 << 7);
+    instrucao |= ((uint32_t)(imm_4_0 << 7));
     instrucao |= ((funct3 & 0x07) << 12);
     instrucao |= ((rs1 & 0x1F) << 15);
     instrucao |= ((rs2 & 0x1F) << 20);
-    instrucao |= (imm_11_5 << 25);
+    instrucao |= ((uint32_t)(imm_11_5 << 25));
     return instrucao;
 }
 
@@ -73,12 +73,12 @@ uint32_t montar_tipo_B(int opcode, int funct3, int rs1, int rs2, int imediato) {
     uint32_t imm_10_5 = (imediato >> 5) & 0x3F;
     uint32_t imm_12 = (imediato >> 12) & 0x01;
     instrucao |= (opcode & 0x7F);
-    instrucao |= (imm_11 << 7);
-    instrucao |= (imm_4_1 << 8);
+    instrucao |= ((uint32_t)(imm_11 << 7));
+    instrucao |= ((uint32_t)(imm_4_1 << 8));
     instrucao |= ((funct3 & 0x07) << 12);
     instrucao |= ((rs1 & 0x1F) << 15);
     instrucao |= ((rs2 & 0x1F) << 20);
-    instrucao |= (imm_10_5 << 25);
-    instrucao |= (imm_12 << 31);
+    instrucao |= ((uint32_t)(imm_10_5 << 25));
+    instrucao |= ((uint32_t)(imm_12 << 31));
     return instrucao;
 }

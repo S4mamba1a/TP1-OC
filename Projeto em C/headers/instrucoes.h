@@ -3,7 +3,11 @@
 
 #include <stdint.h>
 #include <string.h>
+#include <stdlib.h>
 #include "dicionario.h"
+
+// Função auxiliar encapsulada para extrair números de registradores/imediatos
+int extrair_numero(const char *str);
 
 // Função de busca interna
 Instrucao* IIdentificaInstrucao(const char *nome);

@@ -29,8 +29,6 @@ typedef struct {
     int funct7;
 } Instrucao;
 
-IndentificaInstrucao(const char *nome);
-
 // Declaração do dicionário de instruções
 extern Instrucao dicionario[];
 extern const int TAM_DICIONARIO;

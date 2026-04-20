@@ -2,6 +2,15 @@
 #include <string.h>
 #include <stdio.h>
 
+// Implementação da função de extrair números
+int extrair_numero(const char *str) {
+    if (str == NULL) return 0;
+    if (str[0] == 'x' || str[0] == 'X') {
+        return atoi(str + 1); 
+    }
+    return atoi(str);
+}
+
 // Função de busca interna
 Instrucao* IIdentificaInstrucao(const char *nome) {
     for (int i = 0; i < TAM_DICIONARIO; i++) {

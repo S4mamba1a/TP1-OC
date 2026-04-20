@@ -6,6 +6,17 @@
 #include <stdlib.h>
 #include "dicionario.h"
 
+
+// Struct para a tabela de rótulos 
+typedef struct {
+    char nome[50];
+    int endereco;
+} Rotulo;
+
+// Funções para gerenciar a tabela de rótulos
+void adicionar_rotulo(const char* nome, int endereco);
+int buscar_rotulo(const char* nome);
+
 // Função auxiliar encapsulada para extrair números de registradores/imediatos
 int extrair_numero(const char *str);
 

@@ -2,6 +2,25 @@
 #include <string.h>
 #include <stdio.h>
 
+// Gerenciamento da tabela de rótulos
+Rotulo tabela_rotulos[100];
+int total_rotulos = 0;
+
+void adicionar_rotulo(const char* nome, int endereco) {
+    strcpy(tabela_rotulos[total_rotulos].nome, nome);
+    tabela_rotulos[total_rotulos].endereco = endereco;
+    total_rotulos++;
+}
+
+int buscar_rotulo(const char* nome) {
+    for (int i = 0; i < total_rotulos; i++) {
+        if (strcmp(nome, tabela_rotulos[i].nome) == 0) {
+            return tabela_rotulos[i].endereco;
+        }
+    }
+    return -1;
+}
+
 // Implementação da função de extrair números
 int extrair_numero(const char *str) {
     if (str == NULL) return 0;
@@ -56,7 +75,7 @@ uint32_t montar_tipo_I(int opcode, int rd, int funct3, int rs1, int imediato) {
 uint32_t montar_tipo_S(int opcode, int funct3, int rs1, int rs2, int imediato) {
     uint32_t instrucao = 0;
     uint32_t imm_4_0 = imediato & 0x1F;
-    uint32_t imm_11_5 = (imediato >> 5) & 0x7F;
+    uint32_t imm_11_5 = ((uint32_t)(imediato >> 5)) & 0x7F;
     instrucao |= (opcode & 0x7F);
     instrucao |= ((uint32_t)(imm_4_0 << 7));
     instrucao |= ((funct3 & 0x07) << 12);

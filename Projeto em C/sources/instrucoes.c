@@ -23,11 +23,19 @@ int buscar_rotulo(const char* nome) {
 
 // Implementação da função de extrair números
 int extrair_numero(const char *str) {
-    if (str == NULL) return 0;
-    if (str[0] == 'x' || str[0] == 'X') {
-        return atoi(str + 1); 
+    if (str == NULL) {
+        return 0;
     }
-    return atoi(str);
+
+    // Criamos um ponteiro que aponta para o início da string
+    const char *inicio = str;
+
+    // Se a string começar com 'x' ou 'X'
+    if (str[0] == 'x' || str[0] == 'X') {
+        inicio = str + 1;
+    }
+    // O strtol converte o texto para um número inteiro longo.
+    return (int)strtol(inicio, NULL, 0);
 }
 
 // Função de busca interna

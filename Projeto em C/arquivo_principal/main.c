@@ -105,7 +105,25 @@ int main(int num_args, char *args[]) {
         char *arg1 = strtok(NULL, " ,\n\r\t()");
         char *arg2 = strtok(NULL, " ,\n\r\t()");
         char *arg3 = strtok(NULL, " ,\n\r\t()");
-    
+        // tradutor de pseudo-instrucoes
+        if (strcmp(nome_instrucao, "li") == 0) {
+            // li rd, imm  => traduzimos para: addi rd, x0, imm
+            nome_instrucao = "addi";
+            arg3 = arg2; 
+            arg2 = "x0";
+        } 
+        else if (strcmp(nome_instrucao, "mv") == 0) {
+            // mv rd, rs -> traduzimos para: addi rd, rs, 0
+            nome_instrucao = "addi";
+            arg3 = "0";
+        }
+        else if (strcmp(nome_instrucao, "nop") == 0) {
+            // nop -> traduzimos para: addi x0, x0, 0
+            nome_instrucao = "addi";
+            arg1 = "x0"; 
+            arg2 = "x0"; 
+            arg3 = "0";
+        }
         // Busca a instrução no dicionário
         Instrucao *inst = IIdentificaInstrucao(nome_instrucao);
         
